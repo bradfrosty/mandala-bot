@@ -16,4 +16,11 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 
 bot.start(ctx => ctx.reply('Hello world!'));
 bot.hears('musica', ctx => ctx.reply('send me da music'));
+bot.hears(/(https:\/\/open.spotify.com\/track\/|spotify:track:)([a-zA-Z0-9]+)/, ctx => {
+  console.log('got a spotify link', ctx.message, ctx.editedMessage);
+  console.log(ctx.message, ctx.match);
+  if (ctx && ctx.match && ctx.match[0]) {
+    ctx.reply('got your link ' + ctx.match[0]);
+  }
+});
 bot.launch();
